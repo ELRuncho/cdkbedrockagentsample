@@ -77,3 +77,33 @@ class RetencionStack(Stack):
         )
 
         agent.add_knowledge_base(kb)
+
+        guard1 = bedrock.Guardrail(
+                                    self, 'guard1',
+                                    name='guard1',
+                                    description= "guardrails legales y eticos."
+                                    )
+
+        #guard1.add_content_filter(
+        #    type=ContentFilterType.SEXUAL,
+        #    input_strength=ContentFilterStrength.HIGH,
+        #    output_strength=ContentFilterStrength.MEDIUM,
+        #    input_modalities=[ModalityType.TEXT, ModalityType.IMAGE],
+        #    output_modalities=[ModalityType.TEXT],
+        #);
+
+        # Add PII filter for addresses
+        guard1.add_pii_filter(
+            type= bedrock.pii_type.General.ADDRESS,
+            action= bedrock.GuardrailAction.ANONYMIZE,
+        )
+
+        # Add PII filter for credit card numbers
+        guard1.add_pii_filter(
+            type= bedrock.pii_type.Finance.CREDIT_DEBIT_CARD_NUMBER,
+            action= bedrock.GuardrailAction.ANONYMIZE,
+        )
+
+        agent.add_guardrail(guard1)
+
+
