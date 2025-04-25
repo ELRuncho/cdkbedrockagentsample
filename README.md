@@ -55,4 +55,9 @@ command.
  * `cdk diff`        compare deployed stack with current state
  * `cdk docs`        open CDK documentation
 
+## Dependencies for this package
+
+https://github.com/awslabs/generative-ai-cdk-constructs/tree/main/src/cdk-lib/bedrock
+
+
 Enjoy!
