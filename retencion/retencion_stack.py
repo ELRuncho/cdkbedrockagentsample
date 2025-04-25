@@ -32,11 +32,17 @@ class RetencionStack(Stack):
 
         )
 
+        crip =  bedrock.CrossRegionInferenceProfile.from_config(
+            geo_region=bedrock.CrossRegionInferenceProfileRegion.US,
+            model=bedrock.BedrockFoundationModel.ANTHROPIC_CLAUDE_3_5_HAIKU_V1_0,
+        )
+
         agent = bedrock.Agent(
             self, 
             "RetencionAgent",
             instruction="You are a helpful assistant. Answer the question based on the context.",
-            foundation_model=bedrock.BedrockFoundationModel.ANTHROPIC_CLAUDE_3_5_HAIKU_V1_0,
+            foundation_model=crip,
+            should_prepare_agent= True ,
         )
 
         action_group: bedrock.ActionGroup = bedrock.AgentActionGroup(
